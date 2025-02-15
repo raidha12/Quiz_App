@@ -14,16 +14,16 @@ const questions = [
     questionText: "Which command is used to create a new React app using Vite?",
     answerOptions: [
       { answerText: "npx create-react-app my-app", isCorrect: false },
-      { answerText: "npm create vite@latest my-app", isCorrect: true },
       { answerText: "npx create vite-app my-app", isCorrect: false },
       { answerText: "vite new my-app", isCorrect: false },
+      { answerText: "npm create vite@latest my-app", isCorrect: true },
     ],
   },
   {
     questionText: "Which command is used to start a Vite project in development mode?",
     answerOptions: [
-      { answerText: "npm run dev", isCorrect: true },
       { answerText: "npm start", isCorrect: false },
+      { answerText: "npm run dev", isCorrect: true },
       { answerText: "vite start", isCorrect: false },
       { answerText: "npm run build", isCorrect: false },
     ],
@@ -40,9 +40,9 @@ const questions = [
   {
     questionText: "Which of the following is a React hook?",
     answerOptions: [
-      { answerText: "useState", isCorrect: true },
       { answerText: "useFunction", isCorrect: false },
       { answerText: "useVariable", isCorrect: false },
+      { answerText: "useState", isCorrect: true },
       { answerText: "useMethod", isCorrect: false },
     ],
   },
@@ -94,7 +94,7 @@ function App() {
                 onClick={() => handleAnswerOption(index, option.isCorrect)}
                 className={`block w-full p-2 mt-2 rounded border border-gray-400 text-gray-900 font-medium 
                 ${answered ?
-                    option.isCorrect ? "bg-green-500 text-white"
+                    option.isCorrect ? "bg-green-600 text-white"
                       : selectedAnswer === index ? "bg-red-500 text-white"
                         : "bg-gray-200"
                     : "hover:bg-gray-100"}`
@@ -104,7 +104,7 @@ function App() {
 
             <button
               className={`block w-full text-white p-2 rounded mt-4 font-semibold 
-              ${answered ? "bg-green-700 hover:bg-green-800" : "bg-green-400 cursor-not-allowed"}`}
+              ${answered ? "bg-green-700 hover:bg-green-800" : "bg-green-500 cursor-not-allowed"}`}
               disabled={!answered}
               onClick={nextQuestion}>{currentQuestion === questions.length - 1 ? "Finish Quiz" : "Next Question"}
             </button>
