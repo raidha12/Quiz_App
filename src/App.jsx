@@ -49,26 +49,26 @@ const questions = [
   },
 ];
 
+
 function App() {
   return (
     <div className="flex justify-center items-center h-screen">
-      <div className="w-full max-w-lg bg-white p-5 rounded shadow-lg">
-        <div className="p-2 border text-center font-bold mb-2 text-xl">
-          Quiz App
-        </div>
+      <div className="w-full max-w-lg bg-gray-100 p-6 rounded-lg shadow-xl border border-gray-400">
+        <div className="text-center font-bold text-2xl text-gray-900 mb-4">Quiz App</div>
         <div>
-          <div>{questions[0].questionText}</div>
+          <div className="text-lg font-semibold text-gray-700 mb-4">{questions[0].questionText}</div>
           {questions[0].answerOptions.map((option, index) => (
-            <button className="block w-full p-2 mt-2 rounded border">
+            <button
+              key={index}
+              className="block w-full p-3 mt-3 rounded-lg border border-gray-400 bg-gray-200 hover:bg-gray-300 transition duration-200"
+            >
               {option.answerText}
             </button>
           ))}
-          <button className="block w-full bg-green-600 text-white p-2 rounded">
+          <button className="block w-full bg-green-700 text-white p-3 mt-4 rounded-lg hover:bg-green-800 transition duration-200">
             Next Question
           </button>
-          <p className="text-center text-gray-400 text-sm">
-            Question 1 of {questions.length}
-          </p>
+          <p className="text-center text-gray-500 text-sm mt-2">Question 1 of {questions.length}</p>
         </div>
       </div>
     </div>
