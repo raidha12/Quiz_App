@@ -1,10 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 
 const questions = [
   {
     questionText: "What is React.js?",
     answerOptions: [
-      { answerText: "A JavaScript library for building user interfaces", isCorrect: true,},
+      { answerText: "A JavaScript library for building user interfaces", isCorrect: true },
       { answerText: "A programming language", isCorrect: false },
       { answerText: "A database management system", isCorrect: false },
       { answerText: "A backend framework", isCorrect: false },
@@ -20,8 +20,7 @@ const questions = [
     ],
   },
   {
-    questionText:
-      "Which command is used to start a Vite project in development mode?",
+    questionText: "Which command is used to start a Vite project in development mode?",
     answerOptions: [
       { answerText: "npm run dev", isCorrect: true },
       { answerText: "npm start", isCorrect: false },
@@ -49,26 +48,59 @@ const questions = [
   },
 ];
 
-
 function App() {
+  const [currentQuestion, setCurrentQuestion] = useState(0);
+  const [answered, setAnswered] = useState(false);
+  const [selectedAnswer, setSelectedAnswer] = useState(null);
+  const [score, setScore] = useState(0);
+
+  const handleAnswerOption = (index, isCorrect) => {
+    setAnswered(true);
+    setSelectedAnswer(index);
+    if (isCorrect) setScore(score + 1);
+  };
+
+  const nextQuestion = () => {
+    setAnswered(false);
+    setSelectedAnswer(null);
+    setCurrentQuestion(currentQuestion + 1);
+  };
+
   return (
-    <div className="flex justify-center items-center h-screen">
-      <div className="w-full max-w-lg bg-gray-100 p-6 rounded-lg shadow-xl border border-gray-400">
-        <div className="text-center font-bold text-2xl text-gray-900 mb-4">Quiz App</div>
+    <div className="flex justify-center items-center h-screen bg-gray-100">
+      <div className="w-full max-w-lg bg-white p-5 rounded shadow-lg border border-gray-400">
+        <div className="p-3 border-b text-center font-bold mb-4 text-2xl text-green-700">Quiz App</div>
+
         <div>
-          <div className="text-lg font-semibold text-gray-700 mb-4">{questions[0].questionText}</div>
-          {questions[0].answerOptions.map((option, index) => (
+          <div className="text-gray-900 font-semibold text-lg mb-2">
+            {questions[currentQuestion].questionText}
+          </div>
+          {questions[currentQuestion].answerOptions.map((option, index) => (
             <button
               key={index}
-              className="block w-full p-3 mt-3 rounded-lg border border-gray-400 bg-gray-200 hover:bg-gray-300 transition duration-200"
+              onClick={() => handleAnswerOption(index, option.isCorrect)}
+              className={`block w-full p-2 mt-2 rounded border border-gray-400 text-gray-900 font-medium 
+                ${answered ?
+                  option.isCorrect ? "bg-green-500 text-white"
+                    : selectedAnswer === index ? "bg-red-500 text-white"
+                      : "bg-gray-200"
+                  : "hover:bg-gray-100"}`
+              }
             >
               {option.answerText}
             </button>
           ))}
-          <button className="block w-full bg-green-700 text-white p-3 mt-4 rounded-lg hover:bg-green-800 transition duration-200">
+          <button
+            className={`block w-full text-white p-2 rounded mt-4 font-semibold 
+              ${answered ? "bg-green-700 hover:bg-green-800" : "bg-green-400 cursor-not-allowed"}`}
+            disabled={!answered}
+            onClick={nextQuestion}
+          >
             Next Question
           </button>
-          <p className="text-center text-gray-500 text-sm mt-2">Question 1 of {questions.length}</p>
+          <p className="text-center text-gray-500 text-sm mt-2">
+            Question {currentQuestion + 1} of {questions.length}
+          </p>
         </div>
       </div>
     </div>
