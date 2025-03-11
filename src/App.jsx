@@ -107,13 +107,16 @@ function App() {
               <button
                 key={index}
                 onClick={() => handleAnswerOption(index, option.isCorrect)}
+                disabled={answered}
                 className={`block w-full p-2 mt-2 rounded border border-gray-400 text-gray-900 font-medium 
                 ${answered ?
                     option.isCorrect ? "bg-green-600 text-white"
                       : selectedAnswer === index ? "bg-red-500 text-white"
                         : "bg-gray-200"
-                    : "hover:bg-gray-100"}`
-                }>{option.answerText}
+                    : "hover:bg-gray-100"}
+                    ${answered ? "cursor-not-allowed" : ""}
+                `}>
+                {option.answerText}
               </button>
             ))}
 
