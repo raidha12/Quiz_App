@@ -73,14 +73,29 @@ function App() {
 
   };
 
+  const restartQuiz = () => {
+    setCurrentQuestion(0);
+    setAnswered(false);
+    setSelectedAnswer(null);
+    setScore(0);
+    setShowScore(false);
+  };
+
   return (
     <div className="flex justify-center items-center h-screen bg-gray-100">
       <div className="w-full max-w-lg bg-white p-5 rounded shadow-lg border border-gray-400">
         <div className="p-3 border-b text-center font-bold mb-4 text-2xl text-green-700">Quiz App</div>
         {showScore ? (
-          <div className="block w-full p-2 mt-2 rounded border border-gray-400 text-gray-900 font-medium 
+          <div className="flex flex-col  items-center space-y-4">
+            <div className="block w-full p-2 mt-2 rounded border border-gray-400 text-gray-900 font-medium 
           text-center bg-gray-200 hover:bg-gray-100">You scored {score} out of {questions.length}
+            </div>
+            <button onClick={restartQuiz}
+              className="block w-full text-white p-2 rounded mt-4 font-semibold bg-green-700 hover:bg-green-800">
+              Restart Quiz
+            </button>
           </div>
+
         ) :
 
           <div>
@@ -104,7 +119,7 @@ function App() {
 
             <button
               className={`block w-full text-white p-2 rounded mt-4 font-semibold 
-              ${answered ? "bg-green-700 hover:bg-green-800" : "bg-green-500 cursor-not-allowed"}`}
+              ${answered ? "bg-green-700 hover:bg-green-800" : "bg-green-600 cursor-not-allowed"}`}
               disabled={!answered}
               onClick={nextQuestion}>{currentQuestion === questions.length - 1 ? "Finish Quiz" : "Next Question"}
             </button>
